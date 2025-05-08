@@ -26,9 +26,13 @@ void config_file_completed() {
         printf("[main][%d]:\t\t# Influx->precision: %s\n", node.pid.main, node.config.influxDB.precision);
         printf("[main][%d]:\t\t# Influx->dbOrBucket: %s\n", node.pid.main, node.config.influxDB.dbOrBucket);
         printf("[main][%d]:\t\t# Influx->port: %i\n", node.pid.main, node.config.influxDB.serviceInfo.port);
+        printf("[main][%d]:\t\t# Influx->freshConnect: %s\n", node.pid.main, INT_TRUE_FALSE_STR(node.config.influxDB.freshConnect));
+        printf("[main][%d]:\t\t# Influx->forbidReuse: %s\n", node.pid.main, INT_TRUE_FALSE_STR(node.config.influxDB.forbidReuse));
         //printf("[main][%d]:\t\t# Influx->host: %s\n", node.pid.main, node.config.influxDB.serviceInfo.);
         printf("[main][%d]:\t\t# Influx->mDNSserviceType: %s\n", node.pid.main, node.config.influxDB.mDNSserviceType);
         printf("[main][%d]:\t\t# Influx->useServiceScan: %s\n", node.pid.main, INT_TRUE_FALSE_STR(node.config.influxDB.useServiceScan));
+        printf("[main][%d]:\t\t# Influx->connectTimeoutMs: %i\n", node.pid.main, node.config.influxDB.connectTimeoutMs);
+        printf("[main][%d]:\t\t# Influx->totalTimeoutMs: %i\n", node.pid.main, node.config.influxDB.totalTimeoutMs);
         printf("[main][%d]:\t\t# Influx->postIntervalSeconds: %i\n", node.pid.main, node.config.influxDB.postIntervalSeconds);
         printf("[main][%d]:\t\t# network->mDNS: %s\n", node.pid.main, INT_TRUE_FALSE_STR(node.config.network.mDNS));
         printf("[main][%d]:\t\t# network->httpPort: %i\n", node.pid.main, node.config.network.httpPort);
