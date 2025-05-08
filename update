@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo cp -v html/*.* /srv/node_rpi/html/

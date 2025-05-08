@@ -1,0 +1,71 @@
+{
+   libcrypto_addr4
+   Memcheck:Addr4
+   obj:/usr/lib/arm-linux-gnueabihf/libcrypto.so.3
+}
+{
+   libcrypto_addr4_done
+   Memcheck:Addr4
+   fun:CRYPTO_secure_malloc_done
+}
+{
+   libcrypto_addr4_free
+   Memcheck:Addr4
+   fun:OBJ_sigid_free
+}
+{
+   libcrypto_addr4_cleanup
+   Memcheck:Addr4
+   fun:EVP_PBE_cleanup
+}
+{
+   libcrypto_addr4_remove
+   Memcheck:Addr4
+   fun:OBJ_NAME_remove
+}
+{
+   libarmmem_addr8
+   Memcheck:Addr8
+   obj:/usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+}
+{
+   libssl_addr4
+   Memcheck:Addr4
+   obj:/usr/lib/arm-linux-gnueabihf/libssl.so.3
+}
+{
+   SSL_COMP_get_compression_methods_addr4
+   Memcheck:Addr4
+   fun:SSL_COMP_get_compression_methods
+}
+{
+   OPENSSL_init_ssl_addr4
+   Memcheck:Addr4
+   fun:OPENSSL_init_ssl
+}
+{
+   libarmmem_addr8
+   Memcheck:Addr8
+   obj:/usr/lib/arm-linux-gnueabihf/libarmmem-v7l.so
+}
+{
+   libdbus_dbus_malloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:dbus_malloc
+}
+{
+   libdbus_dbus_malloc0
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   fun:dbus_malloc0
+}
+{
+   libdbus_dbus_realloc
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:dbus_realloc
+}

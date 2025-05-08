@@ -1,0 +1,7 @@
+libcurl4-openssl-dev
+avahi-daemon
+libavahi-client-dev
+libavahi-common-dev
+libmicrohttpd-dev
+libjansson-dev
+uuid-dev

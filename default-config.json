@@ -1,0 +1,38 @@
+{
+    "id": "node-id-notset",
+    "clusterID": "9B28U91B307X4AD5BF586057CEAG010C",
+    "servePath": "/srv/node_rpi",
+    "i2cBusPath": "/dev/i2c-1",
+    "dataFolderName": "data",
+    "logMilliseconds": 10,
+    "logValues": true,
+    "logValuesToFile": false,
+    "logValuesToInfluxDB": true,
+    "logValuesFileClearSeconds": 5,
+    "tmpfs": {
+        "use": false,
+        "sizeMB": 5
+    },
+    "network": {
+        "mDNS": true,
+        "httpPort": 8080,
+        "mqPublish": false,
+        "httpmDNSserviceType": "_nodeRpiHttp._tcp",
+        "mqBrokermDNSserviceType": "_nodeRpiMQbroker._tcp"
+    },
+    "influxDB": {
+        "useServiceScan": true,
+        "postIntervalSeconds": 5,
+        "dbVersion": 1,
+        "port": 8086,
+        "https": false,
+        "ipAddress": "",
+        "org": "",
+        "token": "",
+        "username": "",
+        "password": "",
+        "precision": "ns",
+        "dbOrBucket": "test",
+        "mDNSserviceType": "_wsInfluxDB._tcp"
+    }
+}
