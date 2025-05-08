@@ -94,7 +94,7 @@ void node_init(int argc, char *argv[]) {
     config_process_file(argc, argv);
 
     //-----------------------------------------------
-    // Populate node_map - Hash Map
+    // Populate node_map
     //-----------------------------------------------
     map_add(node_map, "node.config.id", &node.config.id, TYPE_STRING);
     map_add(node_map, "node.config.clusterId", &node.config.clusterId, TYPE_STRING);

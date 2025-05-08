@@ -37,7 +37,7 @@
 // Defines
 //------------------------------------------------------------------
 #define GRAVITY 9.80665f // m/s²
-#define MAP_SIZE 128
+#define MAP_SIZE 128     // 96 (entries) / .75 (Load Factor) = 128
 #define DATA_FILE_NAME "node_values.txt"
 #define MPU_DATA_FILE_NAME "mpu_ilp_values.txt"
 
@@ -123,6 +123,7 @@ typedef enum {
 typedef struct MapEntry {
     char *key;
     void *ptr;
+    bool  runtime;
     ValueType type;
     struct MapEntry *next;
 } MapEntry;
@@ -137,10 +138,6 @@ typedef struct {
     pid_t pid;
     int   dbVersion;
     int   cfgVersion; 
-//    bool  freshConnect;
-//    bool  forbidReuse;
-//    int   totalTimeoutMs;
-//    int   connectTimeoutMs;
     char *full_url;
     char *token;
     struct curl_slist *headers;
