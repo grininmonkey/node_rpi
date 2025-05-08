@@ -1,6 +1,7 @@
 
 #include "../../include/node.h"
 #include "../../include/utilsIP.h"
+#include "../../include/utilsSleepMs.h"
 #include "../../include/utilsVerbosePrint.h"
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Free Influx Curl configuration
@@ -38,7 +39,9 @@ void log_update_influx_curl(InfluxCurl *influxCurl, InfluxDB *config) {
         curl_slist_free_all(influxCurl->headers);
         influxCurl->headers = NULL;
     }
-        
+    
+    sleep_ms(100); // troubleshooting for reset
+
     influxCurl->curl = curl_easy_init();
     if (!influxCurl->curl) {
         influxCurl->ready = false;

@@ -28,6 +28,7 @@ $(OBJDIR)/%.o: $(SRC_DIR)/%.c
 clean:
 	rm -rf $(OBJDIR) $(TARGET)
 	find . -name '._*' -delete
+	find . -type f \( -name "*.c" -o -name "*.h" -o -name "*.json" -o -name "*.txt" -o -name "*.supp" -o -name "Makefile" \) -exec chmod -x {} +
 
 memcheck:
 	@sudo valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --gen-suppressions=all --suppressions=valgrind.supp ./$(TARGET) --service -v
