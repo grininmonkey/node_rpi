@@ -142,5 +142,7 @@ void node_init(int argc, char *argv[]) {
     // Populate node_map (sensor properties)
     //-----------------------------------------------
     // soon™
-    //map_add(node_map, "node.config.mpu.i2cBus", &node.config.mpu.i2cBus, TYPE_UINT8, false);
+    map_add(node_map, "node.mpu.accel.g.x", &node.mpu.accel.g.x, TYPE_FLOAT, false);
+    map_add(node_map, "node.mpu.accel.g.x", &node.mpu.accel.g.y, TYPE_FLOAT, false);
+    map_add(node_map, "node.mpu.accel.g.x", &node.mpu.accel.g.z, TYPE_FLOAT, false);
 }
