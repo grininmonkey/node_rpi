@@ -36,7 +36,7 @@ void* http_serve_thread(void* arg) {
     //--------------------------------------------------------------------------
     // stdout Notification
     //--------------------------------------------------------------------------
-    verbose_print("[NETWORK][%d]: http_t started on port(%i)\n", t_pid, httpPort);
+    verbose_print("[NETWORK][%d]: Micro http started on port(%i)\n", t_pid, httpPort);
 
     //--------------------------------------------------------------------------
     // Start Micro HTTP daemon-server & publish mDNS http service
@@ -46,7 +46,7 @@ void* http_serve_thread(void* arg) {
         (MHD_AccessHandlerCallback)&http_answer_connection, NULL, MHD_OPTION_END);
 
     if (NULL == daemon) {
-        verbose_mutex_print("[NETWORK][%d]: http_t stopped, unable to start daemon\n", t_pid);
+        verbose_mutex_print("[NETWORK][%d]: Micro http stopped, unable to start daemon\n", t_pid);
         return NULL;
     } 
     
@@ -75,7 +75,7 @@ void* http_serve_thread(void* arg) {
     free(service_type);
     stop_mdns_service(t_pid);
     MHD_stop_daemon(daemon);
-    verbose_mutex_print("[NETWORK][%d]: http_t Stopped\n", t_pid);
+    verbose_mutex_print("[NETWORK][%d]: Micro http Stopped\n", t_pid);
  
     return NULL;
 }
