@@ -1,7 +1,7 @@
 # General
 push
 .vscode
-wsNode
+node_rpi
 ._*
 
 
