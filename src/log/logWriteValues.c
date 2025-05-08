@@ -17,7 +17,7 @@ int log_write_values(bool influxInterval, bool fileInterval, InfluxCurl *influxC
     // Local variables
     //-----------------------------------------------------------------
     char ilp_line[512];
-    bool LogToInflux    = false;
+    bool logToInflux    = false;
     bool logToFile      = false;
 
     //-----------------------------------------------------------------
@@ -25,8 +25,8 @@ int log_write_values(bool influxInterval, bool fileInterval, InfluxCurl *influxC
     //-----------------------------------------------------------------
     pthread_mutex_lock(&node.lock);
     logToFile       = node.config.logValuesToFile;
-    LogToInflux     = node.config.logValuesToInflux;
-    if (LogToInflux) log_update_influx_curl(influxCurl, &node.config.influxDB);
+    logToInflux     = node.config.logValuesToInflux;
+    log_update_influx_curl(logToInflux, influxCurl, &node.config.influxDB);
     pthread_mutex_unlock(&node.lock);
 
     //-----------------------------------------------------------------
@@ -48,7 +48,7 @@ int log_write_values(bool influxInterval, bool fileInterval, InfluxCurl *influxC
     //-----------------------------------------------------------------
     // Influx 
     //-----------------------------------------------------------------
-    if (influxInterval && LogToInflux && influxCurl->ready) {
+    if (influxInterval && logToInflux && influxCurl->ready) {
         char influx_buffer[(2 * mpu_samples_count) * 512];
         size_t influx_buffer_size = 0;
 

@@ -24,7 +24,7 @@ void log_free_influx_curl(InfluxCurl *influxCurl) {
 // This function is called when the InfluxDB configuration changes.
 // It updates the curl configuration and URL based on the new settings.
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-void log_update_influx_curl(InfluxCurl *influxCurl, InfluxDB *config) {
+void log_update_influx_curl(bool logToInflux, InfluxCurl *influxCurl, InfluxDB *config) {
     if (influxCurl->cfgVersion == config->cfgVersion)
         return;
 
@@ -40,11 +40,15 @@ void log_update_influx_curl(InfluxCurl *influxCurl, InfluxDB *config) {
         influxCurl->headers = NULL;
     }
     
-    sleep_ms(100); // troubleshooting for reset
+    if (!logToInflux) {
+        return;
+    }
 
-    influxCurl->curl = curl_easy_init();
+    sleep_ms(100); // troubleshooting for reset
+    
+    influxCurl->ready   = false;
+    influxCurl->curl    = curl_easy_init();
     if (!influxCurl->curl) {
-        influxCurl->ready = false;
         return;
     }
 
@@ -92,8 +96,6 @@ void log_update_influx_curl(InfluxCurl *influxCurl, InfluxDB *config) {
     if (!result)
         return;
 
-    influxCurl->ready = true;
-
     if (config->dbVersion == 1) {
         snprintf(full_url, sizeof(full_url), "%s/write?db=%s&precision=%s",
                  address, config->dbOrBucket, config->precision);
@@ -103,12 +105,10 @@ void log_update_influx_curl(InfluxCurl *influxCurl, InfluxDB *config) {
                  address, config->dbOrBucket, config->org, config->precision);
     } else {
         verbose_print("[LOG][%d] InfluxDB -> Unsupported version: %d\n", influxCurl->pid, config->dbVersion);
-        influxCurl->ready = false;
         return;
     }
 
     if (full_url[0] == '\0') {
-        influxCurl->ready = false;
         return;
     }
 
@@ -117,15 +117,15 @@ void log_update_influx_curl(InfluxCurl *influxCurl, InfluxDB *config) {
 
     curl_easy_setopt(influxCurl->curl, CURLOPT_URL, influxCurl->full_url);
     curl_easy_setopt(influxCurl->curl, CURLOPT_HTTPHEADER, influxCurl->headers);
-    if (!config->forbidReuse && !config->freshConnect) {
-        curl_easy_setopt(influxCurl->curl, CURLOPT_TCP_KEEPALIVE, 1L);
-    }    
     curl_easy_setopt(influxCurl->curl, CURLOPT_FORBID_REUSE, config->forbidReuse ? 1L : 0L);
     curl_easy_setopt(influxCurl->curl, CURLOPT_FRESH_CONNECT, config->freshConnect ? 1L : 0L);
     curl_easy_setopt(influxCurl->curl, CURLOPT_TIMEOUT_MS, config->totalTimeoutMs > 0 ? config->totalTimeoutMs : 4000L);
     curl_easy_setopt(influxCurl->curl, CURLOPT_CONNECTTIMEOUT_MS, config->connectTimeoutMs > 0 ? config->connectTimeoutMs : 1000L);
+    if (!config->forbidReuse && !config->freshConnect) {
+        curl_easy_setopt(influxCurl->curl, CURLOPT_TCP_KEEPALIVE, 1L);
+    }    
 
-
+    influxCurl->ready = true;
     influxCurl->dbVersion = config->dbVersion;
 
 }
