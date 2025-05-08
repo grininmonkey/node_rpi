@@ -8,7 +8,7 @@
 
 unsigned hash(const char *str);
 PointerMap *map_create();
-void map_add(PointerMap *map, const char *key, void *ptr, ValueType type);
+void map_add(PointerMap *map, const char *key, void *ptr, ValueType type, bool canUpdate);
 void *map_get(PointerMap *map, const char *key, ValueType expected_type);
 void *map_get_entry(PointerMap *map, const char *key);
 void map_destroy(PointerMap *map);

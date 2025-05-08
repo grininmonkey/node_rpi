@@ -11,11 +11,12 @@ PointerMap* map_create() {
     return calloc(1, sizeof(PointerMap));
 }
 
-void map_add(PointerMap *map, const char *key, void *ptr, ValueType type) {
+void map_add(PointerMap *map, const char *key, void *ptr, ValueType type, bool canUpdate) {
     unsigned h = hash(key);
     MapEntry *entry = malloc(sizeof(MapEntry));
     entry->key = strdup(key);
     entry->ptr = ptr;
+    entry->canUpdate = canUpdate;
     entry->type = type;
     entry->next = map->buckets[h];
     map->buckets[h] = entry;

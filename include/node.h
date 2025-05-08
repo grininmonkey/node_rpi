@@ -123,7 +123,7 @@ typedef enum {
 typedef struct MapEntry {
     char *key;
     void *ptr;
-    bool  runtime;
+    bool  canUpdate;
     ValueType type;
     struct MapEntry *next;
 } MapEntry;
