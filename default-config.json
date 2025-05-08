@@ -23,6 +23,10 @@
     "influxDB": {
         "useServiceScan": true,
         "postIntervalSeconds": 5,
+        "freshConnect": false,
+        "forbidReuse": false,
+        "connectTimeoutMs": 2000,
+        "totalTimeoutMs": 5000,
         "dbVersion": 1,
         "port": 8086,
         "https": false,

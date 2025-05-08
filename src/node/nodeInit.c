@@ -27,10 +27,10 @@ void node_init(int argc, char *argv[]) {
     node = (Node){
         .config = {
             .logValues = true,
+            .logMilliseconds = 10,
             .logValuesToFile = false,
             .logValuesToInflux = true,
             .logValuesFileClearSeconds = 5,
-            .logMilliseconds = 10,
             .tmpfs = {
                 .use = true,
                 .sizeMB = 5
@@ -42,7 +42,11 @@ void node_init(int argc, char *argv[]) {
                 .serviceInfo = {
                     .port = 8086,
                 },
+                .forbidReuse = false,
+                .freshConnect = false,
+                .totalTimeoutMs = 5000,
                 .useServiceScan = true,
+                .connectTimeoutMs = 2000,
                 .postIntervalSeconds = 2
             },
             .network = {
@@ -107,6 +111,10 @@ void node_init(int argc, char *argv[]) {
     map_add(node_map, "node.config.tmpfs.use", &node.config.tmpfs.use, TYPE_BOOL);
     map_add(node_map, "node.config.tmpfs.sizeMB", &node.config.tmpfs.sizeMB, TYPE_INT);
     map_add(node_map, "node.config.influxDB.https", &node.config.influxDB.https, TYPE_BOOL);
+    map_add(node_map, "node.config.influxDB.forbidReuse", &node.config.influxDB.forbidReuse, TYPE_BOOL);
+    map_add(node_map, "node.config.influxDB.freshConnect", &node.config.influxDB.freshConnect, TYPE_BOOL);
+    map_add(node_map, "node.config.influxDB.connectTimeoutMs", &node.config.influxDB.connectTimeoutMs, TYPE_INT);
+    map_add(node_map, "node.config.influxDB.totalTimeoutMs", &node.config.influxDB.totalTimeoutMs, TYPE_INT);
     map_add(node_map, "node.config.influxDB.dbVersion", &node.config.influxDB.dbVersion, TYPE_INT);
     map_add(node_map, "node.config.influxDB.cfgVersion", &node.config.influxDB.cfgVersion, TYPE_INT);
     map_add(node_map, "node.config.influxDB.serviceInfo.port", &node.config.influxDB.serviceInfo.port, TYPE_INT);

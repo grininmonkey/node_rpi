@@ -114,9 +114,14 @@ void log_update_influx_curl(InfluxCurl *influxCurl, InfluxDB *config) {
 
     curl_easy_setopt(influxCurl->curl, CURLOPT_URL, influxCurl->full_url);
     curl_easy_setopt(influxCurl->curl, CURLOPT_HTTPHEADER, influxCurl->headers);
-    curl_easy_setopt(influxCurl->curl, CURLOPT_TIMEOUT_MS, 5000L); 
-    curl_easy_setopt(influxCurl->curl, CURLOPT_CONNECTTIMEOUT_MS, 2000L);
-    curl_easy_setopt(influxCurl->curl, CURLOPT_TCP_KEEPALIVE, 1L);
+    if (!config->forbidReuse && !config->freshConnect) {
+        curl_easy_setopt(influxCurl->curl, CURLOPT_TCP_KEEPALIVE, 1L);
+    }    
+    curl_easy_setopt(influxCurl->curl, CURLOPT_FORBID_REUSE, config->forbidReuse ? 1L : 0L);
+    curl_easy_setopt(influxCurl->curl, CURLOPT_FRESH_CONNECT, config->freshConnect ? 1L : 0L);
+    curl_easy_setopt(influxCurl->curl, CURLOPT_TIMEOUT_MS, config->totalTimeoutMs > 0 ? config->totalTimeoutMs : 4000L);
+    curl_easy_setopt(influxCurl->curl, CURLOPT_CONNECTTIMEOUT_MS, config->connectTimeoutMs > 0 ? config->connectTimeoutMs : 1000L);
+
 
     influxCurl->dbVersion = config->dbVersion;
 

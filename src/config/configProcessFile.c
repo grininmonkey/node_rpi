@@ -32,8 +32,8 @@ void config_process_file(int argc, char *argv[]) {
     set_uint16(&node.config.logMilliseconds, json_object_get(root, "logMilliseconds"));
     set_boolean(&node.config.logValuesToFile, json_object_get(root, "logValuesToFile"));
     set_boolean(&node.config.logValuesToInflux, json_object_get(root, "logValuesToInflux"));
-    set_uint16(&node.config.logValuesFileClearSeconds, json_object_get(root, "logValuesFileClearSeconds"));
     set_string_nullable(&node.config.dataFolderName, json_object_get(root, "dataFolderName"));
+    set_uint16(&node.config.logValuesFileClearSeconds, json_object_get(root, "logValuesFileClearSeconds"));
 
     json_t *tmpfs = json_object_get(root, "tmpfs");
     if (json_is_object(tmpfs)) {
@@ -44,15 +44,19 @@ void config_process_file(int argc, char *argv[]) {
     json_t *influx = json_object_get(root, "influxDB");
     if (json_is_object(influx)) {
         set_boolean(&node.config.influxDB.https, json_object_get(influx, "https"));
-        set_boolean(&node.config.influxDB.useServiceScan, json_object_get(influx, "useServiceScan"));
         set_uint8(&node.config.influxDB.dbVersion, json_object_get(influx, "dbVersion"));
-        set_uint16(&node.config.influxDB.postIntervalSeconds, json_object_get(influx, "postIntervalSeconds"));
         set_string_nullable(&node.config.influxDB.org, json_object_get(influx, "org"));
         set_string_nullable(&node.config.influxDB.token, json_object_get(influx, "token"));
+        set_boolean(&node.config.influxDB.forbidReuse, json_object_get(influx, "forbidReuse"));
+        set_boolean(&node.config.influxDB.freshConnect, json_object_get(influx, "freshConnect"));
         set_string_nullable(&node.config.influxDB.username, json_object_get(influx, "username"));
         set_string_nullable(&node.config.influxDB.password, json_object_get(influx, "password"));
         set_string_nullable(&node.config.influxDB.precision, json_object_get(influx, "precision"));
+        set_uint16(&node.config.influxDB.totalTimeoutMs, json_object_get(influx, "totalTimeoutMs"));
+        set_boolean(&node.config.influxDB.useServiceScan, json_object_get(influx, "useServiceScan"));
         set_string_nullable(&node.config.influxDB.dbOrBucket, json_object_get(influx, "dbOrBucket"));
+        set_uint16(&node.config.influxDB.connectTimeoutMs, json_object_get(influx, "connectTimeoutMs"));
+        set_uint16(&node.config.influxDB.postIntervalSeconds, json_object_get(influx, "postIntervalSeconds"));
         set_string_nullable(&node.config.influxDB.mDNSserviceType, json_object_get(influx, "mDNSserviceType"));
     }
 

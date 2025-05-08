@@ -129,10 +129,14 @@ typedef struct {
 
 typedef struct {
     CURL *curl;
-    bool ready;
+    bool  ready;
     pid_t pid;
-    int  dbVersion;
-    int  cfgVersion; 
+    int   dbVersion;
+    int   cfgVersion; 
+//    bool  freshConnect;
+//    bool  forbidReuse;
+//    int   totalTimeoutMs;
+//    int   connectTimeoutMs;
     char *full_url;
     char *token;
     struct curl_slist *headers;
@@ -158,10 +162,14 @@ typedef struct {
 typedef struct {
     bool          https;
     bool          useServiceScan;
+    bool          freshConnect;
+    bool          forbidReuse;
     ServiceInfo   serviceInfo;
     uint16_t      postIntervalSeconds;
     uint8_t       dbVersion;
     uint8_t       cfgVersion;
+    uint16_t      connectTimeoutMs;
+    uint16_t      totalTimeoutMs;
     char         *org;
     char         *token;
     char         *username;

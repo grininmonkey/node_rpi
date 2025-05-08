@@ -8,6 +8,14 @@ int http_handle_test(struct MHD_Connection *connection) {
     // 
     //-----------------------------------------------------------------
     pthread_mutex_lock(&node.lock);
+        
+        if (!node.config.influxDB.freshConnect) {
+            node.config.influxDB.freshConnect = true;
+            node.config.influxDB.forbidReuse = true;
+        } else {
+            node.config.influxDB.freshConnect = false;
+            node.config.influxDB.forbidReuse = false;
+        }
         node.config.influxDB.cfgVersion++;
     pthread_mutex_unlock(&node.lock);
 
