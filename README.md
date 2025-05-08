@@ -1,7 +1,7 @@
 # soon™
 
 
-Raspberry PI tcp fixes to help prevent Influx traffic from blocking after a period of time,
+Raspberry Pi tcp fixes to help prevent Influx traffic from blocking after a period of time,
 accumulating large number of TIME_WAIT sockets with Influx.
 
 Add these lines to `/etc/sysctl.conf`:

@@ -142,7 +142,23 @@ void node_init(int argc, char *argv[]) {
     // Populate node_map (sensor properties)
     //-----------------------------------------------
     // soon™
-    map_add(node_map, "node.mpu.accel.g.x", &node.mpu.accel.g.x, TYPE_FLOAT, false);
-    map_add(node_map, "node.mpu.accel.g.x", &node.mpu.accel.g.y, TYPE_FLOAT, false);
-    map_add(node_map, "node.mpu.accel.g.x", &node.mpu.accel.g.z, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.accel.raw.x", &node.mpu.accel.raw.x, TYPE_INT, false);
+    map_add(node_map, "sensor.mpu.accel.raw.y", &node.mpu.accel.raw.y, TYPE_INT, false);
+    map_add(node_map, "sensor.mpu.accel.raw.z", &node.mpu.accel.raw.z, TYPE_INT, false);
+    map_add(node_map, "sensor.mpu.accel.ms2.x", &node.mpu.accel.ms2.x, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.accel.ms2.y", &node.mpu.accel.ms2.y, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.accel.ms2.z", &node.mpu.accel.ms2.z, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.accel.g.x", &node.mpu.accel.g.x, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.accel.g.y", &node.mpu.accel.g.y, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.accel.g.z", &node.mpu.accel.g.z, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.gyro.raw.x", &node.mpu.gyro.raw.x, TYPE_INT, false);
+    map_add(node_map, "sensor.mpu.gyro.raw.y", &node.mpu.gyro.raw.y, TYPE_INT, false);
+    map_add(node_map, "sensor.mpu.gyro.raw.z", &node.mpu.gyro.raw.z, TYPE_INT, false);
+    map_add(node_map, "sensor.mpu.gyro.dps.x", &node.mpu.gyro.dps.x, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.gyro.dps.y", &node.mpu.gyro.dps.y, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.gyro.dps.z", &node.mpu.gyro.dps.z, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.euler.roll", &node.mpu.euler.roll, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.euler.pitch", &node.mpu.euler.pitch, TYPE_FLOAT, false);
+    map_add(node_map, "sensor.mpu.euler.yaw", &node.mpu.euler.yaw, TYPE_FLOAT, false);
+
 }

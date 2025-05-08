@@ -33,6 +33,12 @@ void *sensors_dummy_thread(void *args) {
             pthread_mutex_unlock(&lock);
             break;
         }
+
+        node.mpu.accel.g.x = generate_random_float_x(),
+        node.mpu.accel.g.y = generate_random_float_x(),
+        node.mpu.accel.g.z = generate_random_float_x(),
+
+
         pthread_mutex_unlock(&lock);
 
         //-----------------------------------------------------------------

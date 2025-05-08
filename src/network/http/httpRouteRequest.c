@@ -1,10 +1,11 @@
 //#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../../include/httpRouteRequest.h"
 #include "../../../include/httpHandleFile.h"
 #include "../../../include/httpHandleTest.h"
-#include "../../../include/httpHandleStatus.h"  
+#include "../../../include/httpRouteRequest.h"
+#include "../../../include/httpHandleStatus.h" 
+#include "../../../include/httpHandleSensors.h" 
 #include "../../../include/httpHandleApiNotFound.h"  
 #include "../../../include/httpQueueErrorResponse.h"
 
@@ -21,6 +22,9 @@ int http_route_request(const char *url, struct MHD_Connection *connection) {
     if (strcmp(url, "/api/status") == 0)
         return http_handle_status(connection);
 
+    if (strcmp(url, "/api/sensors") ==0) {
+        return http_handle_sensors(connection);
+    }
 
     if (strcmp(url, "/test") == 0)
         return http_handle_test(connection);
