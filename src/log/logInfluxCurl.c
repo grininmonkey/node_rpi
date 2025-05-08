@@ -73,7 +73,13 @@ void log_update_influx_curl(bool logToInflux, InfluxCurl *influxCurl, InfluxDB *
     const char *preAdr = config->https ? "https://" : "http://";
     const char *result = NULL;
 
-    if (ip6) {
+    if (ip4) {
+        result = ip_to_string(AF_INET, &config->serviceInfo.ip4address, buffer, INET_ADDRSTRLEN);
+        if (result) {
+            snprintf(address, sizeof(address), "%s%s:%u",
+                     preAdr, buffer, config->serviceInfo.port);
+        }
+    } else {
         bool isLL = is_ipv6_link_local(&config->serviceInfo.ip6address);
         result = ip_to_string(AF_INET6, &config->serviceInfo.ip6address, buffer, sizeof(buffer));
         if (result) {
@@ -84,12 +90,6 @@ void log_update_influx_curl(bool logToInflux, InfluxCurl *influxCurl, InfluxDB *
                 snprintf(address, sizeof(address), "%s[%s]:%u",
                          preAdr, buffer, config->serviceInfo.port);
             }
-        }
-    } else {
-        result = ip_to_string(AF_INET, &config->serviceInfo.ip4address, buffer, INET_ADDRSTRLEN);
-        if (result) {
-            snprintf(address, sizeof(address), "%s%s:%u",
-                     preAdr, buffer, config->serviceInfo.port);
         }
     }
 
