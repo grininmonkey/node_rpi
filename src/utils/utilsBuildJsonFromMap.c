@@ -37,7 +37,8 @@ void add_service_list_to_json(json_t *root, const char *key, void *ptr) {
         if (current_service->ip4address != 0) {
             ip_to_string(AF_INET, &current_service->ip4address, ip_buffer, sizeof(ip_buffer));
             json_object_set_new(service_obj, "ip4address", json_string(ip_buffer));
-        } else {
+        } 
+        if (is_ipv6_addr_set(&current_service->ip6address)) {
             ip_to_string(AF_INET6, &current_service->ip6address, ip_buffer, sizeof(ip_buffer));
             json_object_set_new(service_obj, "ip6address", json_string(ip_buffer));
         }
@@ -57,6 +58,7 @@ void add_service_list_to_json(json_t *root, const char *key, void *ptr) {
 //--------------------------------------------------------------------------
 void add_path_to_json(json_t *root, const char *key, const char *required_prefix, void *ptr, ValueType type) {
     size_t prefix_len = strlen(required_prefix);
+    char ip_buffer[INET6_ADDRSTRLEN];
 
     // Only proceed if the key starts with the required prefix
     if (strncmp(key, required_prefix, prefix_len) != 0)
@@ -105,6 +107,18 @@ void add_path_to_json(json_t *root, const char *key, const char *required_prefix
                 break;
             case TYPE_SERVICE_LIST:
                 add_service_list_to_json(curr, tok, ptr);
+                break;
+            case TYPE_IP4:
+                if (*(uint32_t *)ptr != 0) {
+                    ip_to_string(AF_INET, ptr, ip_buffer, sizeof(ip_buffer));
+                    json_object_set_new(curr, tok, json_string(ip_buffer));
+                }
+                break;
+            case TYPE_IP6:
+                if (is_ipv6_addr_set(ptr)) {
+                    ip_to_string(AF_INET6, ptr, ip_buffer, sizeof(ip_buffer));
+                    json_object_set_new(curr, tok, json_string(ip_buffer));
+                }
                 break;
             default:
                 json_object_set_new(curr, tok, json_string("<unsupported>"));

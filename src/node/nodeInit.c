@@ -117,7 +117,10 @@ void node_init(int argc, char *argv[]) {
     map_add(node_map, "node.config.influxDB.totalTimeoutMs", &node.config.influxDB.totalTimeoutMs, TYPE_UINT16);
     map_add(node_map, "node.config.influxDB.dbVersion", &node.config.influxDB.dbVersion, TYPE_UINT8);
     map_add(node_map, "node.config.influxDB.cfgVersion", &node.config.influxDB.cfgVersion, TYPE_UINT16);
-    map_add(node_map, "node.config.influxDB.serviceInfo.port", &node.config.influxDB.serviceInfo.port, TYPE_UINT16);
+    map_add(node_map, "node.config.influxDB.port", &node.config.influxDB.serviceInfo.port, TYPE_UINT16);
+    map_add(node_map, "node.config.influxDB.host", &node.config.influxDB.serviceInfo.host, TYPE_STRING);
+    map_add(node_map, "node.config.influxDB.ip4address", &node.config.influxDB.serviceInfo.ip4address, TYPE_IP4);
+    map_add(node_map, "node.config.influxDB.ip6address", &node.config.influxDB.serviceInfo.ip6address, TYPE_IP6);
     map_add(node_map, "node.config.influxDB.useServiceScan", &node.config.influxDB.useServiceScan, TYPE_BOOL);
     map_add(node_map, "node.config.influxDB.postIntervalSeconds", &node.config.influxDB.postIntervalSeconds, TYPE_UINT16);
     map_add(node_map, "node.config.influxDB.org", &node.config.influxDB.org, TYPE_STRING);

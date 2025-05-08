@@ -107,8 +107,10 @@ typedef struct {
 //------------------------------------------------------------------
 typedef enum {
     TYPE_INT,
-    TYPE_FLOAT,
+    TYPE_IP4,
+    TYPE_IP6,
     TYPE_BOOL,
+    TYPE_FLOAT,
     TYPE_UINT8,
     TYPE_UINT16,
     TYPE_STRING,
