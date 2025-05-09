@@ -45,6 +45,7 @@ int main(int argc, char *argv[]) {
     // Completed
     //----------------------------------------------- 
     free_config();
+    free_service_list(true);
     map_destroy(node_map);
     
     return 0;

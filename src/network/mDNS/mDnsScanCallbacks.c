@@ -72,3 +72,11 @@ void client_callback(AvahiClient *c, AvahiClientState state, void *userdata) {
         avahi_simple_poll_quit(simple_poll);
     }
 }
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Helper: Timeout Callback
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+void timeout_callback(AvahiTimeout *timeout, void *userdata) {
+    avahi_simple_poll_quit(simple_poll);
+}
+

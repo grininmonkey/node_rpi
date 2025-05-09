@@ -33,6 +33,6 @@ void browse_callback(AvahiServiceBrowser *b,
                      void *userdata);
 
 void client_callback(AvahiClient *c, AvahiClientState state, void *userdata);
-
+void timeout_callback(AvahiTimeout *timeout, void *userdata);
 
 #endif

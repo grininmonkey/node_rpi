@@ -17,7 +17,7 @@ int http_handle_sensors(struct MHD_Connection *connection) {
     } else {
         snprintf(sensor_path, sizeof(sensor_path), "sensor");
     }
-    
+
     //------------------------------------------------------------------------
     // Create json
     //------------------------------------------------------------------------
@@ -25,7 +25,7 @@ int http_handle_sensors(struct MHD_Connection *connection) {
     json_object_set_new(root, "status", json_string("OK"));
     json_object_set_new(root, "timestamp", json_string(get_timestamp()));
 
-    //------------------------------------------------------------------------
+    //------------------------------------------------------------------------        
     // Accessing mutex data
     //------------------------------------------------------------------------
     pthread_mutex_lock(&node.lock);

@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "../../include/clientScan.h"
+#include "../../include/utilsHasArgument.h"
 
 void client_route_input_usage(int argc, char *argv[]) {
 
@@ -8,6 +10,12 @@ void client_route_input_usage(int argc, char *argv[]) {
 
 void client_route_input(int argc, char *argv[]) {
 
-    printf("\nComming soon\u2122\n\n");
+    if (has_arg(argc, argv, "--scan") == 1)
+        return client_scan(argc, argv);
+        
 
+    //soon™
+    printf("\nClient commands comming soon\u2122\n\n");
+
+    return;
 }

@@ -105,6 +105,16 @@ typedef struct {
 //------------------------------------------------------------------
 // Structs (Base)
 //------------------------------------------------------------------
+typedef struct {
+    void *(*func)(void *);
+    const char *name;
+} ThreadFunctionEntry;
+
+typedef struct {
+    int one_shot;   
+    int timeout_secs;
+} MdnsScanParams;
+
 typedef enum {
     TYPE_INT,
     TYPE_IP4,
