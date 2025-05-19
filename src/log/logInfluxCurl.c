@@ -112,6 +112,9 @@ void log_update_influx_curl(bool logToInflux, InfluxCurl *influxCurl, InfluxDB *
         return;
     }
 
+    verbose_print("[LOG][%d] InfluxDB -> Curl Url updated to: %s\n", influxCurl->pid, full_url);
+
+    
     STRDUP_REPLACE(influxCurl->full_url, full_url);
     STRDUP_REPLACE_NULLABLE(influxCurl->token, config->token);
 

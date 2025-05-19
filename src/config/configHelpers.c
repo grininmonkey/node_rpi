@@ -1,5 +1,6 @@
 #include <string.h>
 #include <unistd.h>
+#include <arpa/inet.h>
 #include "../../include/node.h"
 #include "../../include/configHelpers.h"
 
@@ -29,6 +30,26 @@ void set_uint16(uint16_t *dest, json_t *new_val){
         uint16_t new_value = json_integer_value(new_val);
         if (new_value > 0) {
             *dest = new_value;
+        }
+    }
+}
+
+void set_uint32(uint32_t *dest, json_t *new_val){
+    if (json_is_integer(new_val)) {
+        uint32_t new_value = json_integer_value(new_val);
+        if (new_value > 0) {
+            *dest = new_value;
+        }
+    }
+}
+
+void set_ip4(uint32_t *dest, json_t *new_val) {
+    if (json_is_string(new_val)) {
+        const char *new_value = json_string_value(new_val);
+        if (new_value && new_value[0] != '\0') {
+            struct in_addr ip_addr;
+            if (inet_pton(AF_INET, new_value, &ip_addr) != 1) return;
+            *dest = ip_addr.s_addr;
         }
     }
 }

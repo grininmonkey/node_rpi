@@ -57,6 +57,7 @@ void config_process_file(int argc, char *argv[]) {
         set_uint16(&node.config.influxDB.connectTimeoutMs, json_object_get(influx, "connectTimeoutMs"));
         set_uint16(&node.config.influxDB.postIntervalSeconds, json_object_get(influx, "postIntervalSeconds"));
         set_string_nullable(&node.config.influxDB.mDNSserviceType, json_object_get(influx, "mDNSserviceType"));
+        set_ip4(&node.config.influxDB.serviceInfo.ip4address ,json_object_get(influx, "ipAddress"));
     }
 
     json_t *network = json_object_get(root, "network");

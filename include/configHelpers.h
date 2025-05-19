@@ -11,6 +11,8 @@ bool get_boolean(bool current, json_t *obj);
 void set_string_nullable(char **dest, json_t *new_val);
 void set_uint8(uint8_t *dest, json_t *new_val);
 void set_uint16(uint16_t *dest, json_t *new_val);
+void set_uint32(uint32_t *dest, json_t *new_val);
+void set_ip4(uint32_t *dest, json_t *new_val);
 void set_boolean(bool *dest, json_t *new_val);
 
 #endif

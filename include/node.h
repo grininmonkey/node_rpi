@@ -94,6 +94,7 @@ typedef struct {
 
 typedef struct {
     uint8_t id;
+    int     FD;
     Accel   accel;
     Gyro    gyro;
     Temp    temp;
