@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     signal(SIGTERM, signal_handler);
 
     //-----------------------------------------------
-    // Initialise global node struct 
+    // Initialize global node struct 
     //-----------------------------------------------
     node_init(argc, argv);
 

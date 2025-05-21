@@ -16,7 +16,7 @@ void set_string_nullable(char **dest, json_t *new_val) {
     }
 }
 
-void set_uint8(uint8_t *dest, json_t *new_val){
+void set_uint8(uint8_t *dest, json_t *new_val) {
     if (json_is_integer(new_val)) {
         uint8_t new_value = json_integer_value(new_val);
         if (new_value > 0) {
@@ -25,7 +25,7 @@ void set_uint8(uint8_t *dest, json_t *new_val){
     }
 }
 
-void set_uint16(uint16_t *dest, json_t *new_val){
+void set_uint16(uint16_t *dest, json_t *new_val) {
     if (json_is_integer(new_val)) {
         uint16_t new_value = json_integer_value(new_val);
         if (new_value > 0) {
@@ -34,7 +34,7 @@ void set_uint16(uint16_t *dest, json_t *new_val){
     }
 }
 
-void set_uint32(uint32_t *dest, json_t *new_val){
+void set_uint32(uint32_t *dest, json_t *new_val) {
     if (json_is_integer(new_val)) {
         uint32_t new_value = json_integer_value(new_val);
         if (new_value > 0) {

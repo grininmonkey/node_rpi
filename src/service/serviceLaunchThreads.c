@@ -18,8 +18,8 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ThreadFunctionEntry service_threads[] = {
     {http_serve_thread,         "NETWORK"},
-    {sensors_dummy_thread,      "DUMMY-SENSOR"},
     {log_values_thread,         "LOG"},
+    {sensors_dummy_thread,      "DUMMY-SENSOR"},
     {mdns_scan_service_thread,  "mDNS"},
 };
 
